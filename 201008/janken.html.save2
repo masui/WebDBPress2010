@@ -1,0 +1,138 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+<title>じゃんけんゲーム</title>
+</head>
+
+<ul>
+  <li>
+    <div style="float:left;">計算機の次の手:　</div>
+    <div id="computer" style="width:100px;color:black;float:left;"></div>
+    <br clear='all'>
+  <li>あなたの手:
+    <input type='button' id="グー" onclick='bet("g")' value="グー">
+    <input type='button' id="チョキ" onclick='bet("c")' value="チョキ">
+    <input type='button' id="パー" onclick='bet("p")' value="パー">
+  <li>戦績: <span id="total">0勝 0敗 0分け</span>
+</ul>
+<blockquote>
+  <table id='score'>
+    <tr><th>計算機の手</th><th>あなたの手</th><th>勝敗</th></tr>
+  </table>
+</blockquote>
+
+<script type="text/javascript">
+var level;
+var hist = '';
+var accum = [];
+var tokens = [];
+var round = 0;
+var gcp_computer = [];
+var gcp_user = [];
+var win = 0, lose = 0, draw = 0;
+var name = {'g':'グー', 'c':'チョキ', 'p':'パー'};
+
+function add(c){
+  tokens[c] = true;
+  hist += c;
+  for(var i=1;i<=level;i++){
+    if(hist.length < i) continue;
+    var s = hist.substr(hist.length-i,i);
+    var v = accum[s];
+    if(typeof(v) == 'undefined') v = 0;
+    accum[s] = v+1;
+  }
+}
+
+function predict(){
+  var res = [];
+  var n = 0;
+  for(var i=1;i<=level;i++){
+    s = hist.substr(hist.length+i-level,level-i);
+    if(typeof(s) == 'undefined' || s == '') break;
+    for(c in tokens){
+      var r = s + c;
+      if(accum[r]){
+        if(accum[r] > n){
+          n = accum[r];
+          res = [c];
+        }else if(accum[r] == n){
+          res.push(c);
+        }
+      }
+    }
+    if(res.length > 0) break;
+  }
+  //dump();
+  return res;
+}
+
+function dump(){
+  for(key in accum){
+    alert(key + " " + accum[key]);
+  }
+}
+
+function show_round(){ // 勝敗を判断して戦績を表示
+  c = gcp_computer[round];
+  u = gcp_user[round];
+  if(c == u){
+    r = '△'; draw++;
+  }
+  else if(c == 'g' && u == 'c' || c == 'c' && u == 'p' || c == 'p' && u == 'g'){
+    r = '×'; lose++;
+  }
+  else {
+    r = '◯'; draw++;
+  }
+  document.getElementById('total').innerHTML = 
+    win + '勝 ' + lose + '敗 ' + draw + '分け';
+  s = document.getElementById('score');
+  e = document.createElement('tr');
+  f = document.createElement('td');
+  f.innerHTML = name[c];
+  e.appendChild(f);
+  f = document.createElement('td');
+  f.innerHTML = name[u];
+  e.appendChild(f);
+  f = document.createElement('td');
+  f.innerHTML = r;
+  e.appendChild(f);
+  s.appendChild(e);
+  round++;
+}
+
+function bet(v){
+  document.getElementById('computer').style.backgroundColor = 'white';
+  gcp_user[round] = v;
+  add(v);
+  show_round();
+  predict_next_gcp();
+  setTimeout('show_next_gcp()',1000);
+}
+
+function predict_next_gcp(){ // 次の手を計算
+  r = predict();
+  c = r[Math.floor(Math.random() * r.length)];
+  gcp_computer[round] = (c == 'p' ? 'c' : c == 'g' ? 'p' : 'g');
+}
+
+function show_next_gcp(){ // 次の手を隠して表示
+  var k = document.getElementById('computer');
+  k.style.backgroundColor = 'black';
+  k.innerHTML = name[gcp_computer[round]];
+}
+
+level = 5;
+add('g'); add('c'); add('p');
+for(i=0;i<level;i++){
+  add(Math.random() < 0.33 ? 'g' : Math.random() < 0.66 ? 'c' : 'p');
+}
+
+predict_next_gcp();
+show_next_gcp();
+
+</script>
+
+</body>
+</html>
