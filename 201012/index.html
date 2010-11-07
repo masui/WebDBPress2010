@@ -15,7 +15,7 @@
 テレビを見ながらプログラムを書くといった具合に、
 いろいろな仕事を同時にやることを「マルチタスキング」と言います。
 複数の仕事を同時にこなすことは一見効率が良さそうですが、
-どうしても集中が阻害されるし頭の切り換えのオーバーヘッドが多いため
+どうしても集中が阻害されるし頭の切り換えのオーバーヘッドが多いため、
 実際には効率が悪いという説が最近は有力になっています
 [<a href='http://www.amazon.com/dp/0307459659'>1</a>]
 [<a href='http://www.amazon.com/dp/0470372257'>2</a>]
@@ -32,8 +32,7 @@
 
 体を動かしたり計算機を操作したりすると、
 頭が切り換わるだけでなく、
-実際に作業の環境が変化します。
-こういう<b>コンテクスト</b>を有効に利用する方法が重要です。
+実際に作業の<b>コンテクスト</b>が変化します。
 
 居場所を変えたり
 文書のフォルダを開いたりといった動作によって<b>コンテクスト切換え</b>を行ない、
@@ -47,7 +46,7 @@
 スーパーで「ウナギ?」と言えばウナギを買いたいのだろうと想像がつきますが、
 街角で「ウナギ!?」とつぶやいても意味がわからないでしょう。
 現在のコンテクストにより、
-「鰻丼ひとつ下さい」や「鰻のパックはどこに売ってますか」という文章が
+「鰻丼ひとつ下さい」や「鰻のパックはどこに売ってますか」のような文が
 省略可能になっていることになります。
 コンテクストを最大限に利用できる予測入力システムならば、
 「ウナ」と入力するだけで「鰻丼ひとつ下さい」という候補を生成できるかもしれません。
@@ -75,7 +74,7 @@
 <li>計算機上で実世界コンテクストを変える
 </ol>
 
-<h3>(1) 計算機の上でのコンテクスト切換え</h3>
+<h3>1. 計算機の上でのコンテクスト切換え</h3>
 
 計算機上では様々な仕事が行なわれるため、
 仕事を切り換えるために様々な方法が利用されます。
@@ -93,22 +92,22 @@ Unixのシェルでは
 <br>
 cdでコンテクスト切り換えを行なうと、
 相対パスを利用して短いファイル名を利用することができます。
-"/home/masui/"の中の「Makefile」と
-"/home/masui/DOC/"の「Makefile」は違うものですから、
-これらを絶対的に区別するためには
+"/home/masui/"の中の"Makefile"と
+"/home/masui/DOC/"の"Makefile"は違うものですから、
+あらゆる状況でこれらを区別するためには
 "/home/masui/Makefile", "/home/masui/DOC/Makefile"
-のようなフルパスを指定する必要がありますが、
+のような絶対パスを指定する必要がありますが、
 現在作業中のディレクトリパスをコンテクストとして利用することにより、
 "Makefile"のような短い相対パス名が短いIDとして利用できていることになります。
 
-単に「Makefile」と言った場合は
+単に"Makefile"と言った場合は
 街角で「ウナギ」と言った場合と同様に、
 どのファイルのことかわからないでしょうが、
 「cd」コマンドの発行によって
 ユーザとシステムがカレントディレクトリというコンテクスト情報を共通知識として共有することにより、
 作業の手間を減らすことができるようになっています。
 
-<h3>(2) 実世界における実世界コンテクスト切り替え</h3>
+<h3>2. 実世界における実世界コンテクスト切り替え</h3>
 
 場所を移動するとコンテクストは簡単に変化します。
 自宅にいるときと会社にいるときはコンテクストがかなり違うのが普通ですし、
@@ -139,14 +138,14 @@ cdでコンテクスト切り換えを行なうと、
 どの工具が使われているのかというコンテクストが一目了然になっています。
 
 <blockquote>
-<img src="http://gyazo.com/3b465ec6920300165faaf0d4ad3cee41">
+<img src="http://gyazo.com/3b465ec6920300165faaf0d4ad3cee41.png">
 </blockquote>
 
-<h3>(3) 計算機上のコンテクストが実世界のもので表現される</h3>
+<h3>3. 計算機上のコンテクストが実世界のもので表現される</h3>
 
 cdコマンドで計算機操作のコンテクストを指定したときは、
 コンテクストを示す情報はシェルとユーザの頭の中にだけ存在し、
-自明な形で表現されているわけではないので、
+はっきり明らかに見える形で表現されているわけではないので、
 現在のコンテクストを確認するために
 「pwd」のようなコマンドを利用することがよくあります。
 
@@ -160,7 +159,7 @@ cdコマンドで計算機操作のコンテクストを指定したときは、
 計算機のコンテクストを実世界的に表現すれば直感的な理解が可能になります。
 計算機上で処理すべき書類を全部印刷して積み上げておくようにすると、
 計算機上の仕事の量が実世界の書類の量として表現されるため、
-どれぐらい頑張って働かなければならないかが一目瞭然になり、
+どれぐらい頑張って働かなければならないかが一目瞭然になりますし、
 仕事が溜まってる状況を他人に知らせることもできます。
 
 <p>
@@ -192,24 +191,24 @@ Phiconを動かすことによって地図を操作しようとしているも�
 http://wiredvision.jp/blog/masui/200708/200708171000.html
 -->
 
-下図はお茶の水女子大学の塚田浩二氏が作った「秘密制御システム」で、
+下図はお茶の水女子大学の塚田浩二氏が作った「秘密制御パソコン」で、
 ノートパソコンのディスプレイの傾きによって秘密の具合を制御できるようにしたものです。
 ディスプレイが開かれた状態のとき、
 ディスプレイには右側のような平凡な画面が表示されています。
 
 <blockquote>
-<img src="http://gyazo.com/9e733718a626dc6c848b8f2783a74b45.png" height=100>
-<img src="http://gyazo.com/bf09abc4a08ac178e9ec10b9ed95e094.png" height=100>
+<img src="http://gyazo.com/9e733718a626dc6c848b8f2783a74b45.png" height=200>
+<img src="http://gyazo.com/bf09abc4a08ac178e9ec10b9ed95e094.png" height=200>
 </blockquote>
 
 ディスプレイを傾けると秘密レベルが変化し、
 ファイル共有ソフトや秘密動画のアイコンが表示されるようになっています。
 実世界でディスプレイを傾けるという操作が、
-計算機内の秘密レベルというコンテクストの変化と連動しているところが興味深いです。
+計算機内の秘密レベルというコンテクストの変化と連動しているところが秀逸です。
 
 <blockquote>
-<img src="http://gyazo.com/e2fce1680762956c33039dd02c19ab0c.png" height=100>
-<img src="http://gyazo.com/eb69643a4e242aeb8e69ccb90f1502ff.png" height=100>
+<img src="http://gyazo.com/e2fce1680762956c33039dd02c19ab0c.png" height=200>
+<img src="http://gyazo.com/eb69643a4e242aeb8e69ccb90f1502ff.png" height=200>
 </blockquote>
 
 <h4>在庫情報をWebで見る</h4>
@@ -255,7 +254,7 @@ Getting Things Done</h4>
   もっと色々工夫するのが面白いと思う
 -->
 
-<h3>(4) 実世界コンテクストの切り替えを計算機上で示す</h3>
+<h3>4. 実世界コンテクストの切り替えを計算機上で示す</h3>
 
 前述のような各種のセンサを利用すれば、
 実世界上の移動などによりコンテクストが変化したことを計算機に伝えることができますが、
@@ -276,7 +275,7 @@ Getting Things Done</h4>
 </pre>
 </blockquote>
 
-のようなURLを利用します。
+のようなアドレスを利用します。
 自宅にいるときは「jitaku」という名前を使うことにして
 
 <blockquote>
@@ -313,7 +312,7 @@ Getting Things Done</h4>
 
 <blockquote>
 <pre>
-<code>% ccd jittaku</code>
+<code>% ccd jitaku</code>
 </pre>
 </blockquote>
 
@@ -337,27 +336,23 @@ Gyampによる短いIDをより活用しやすくなります。
 <h3>gcdの実装</h3>
 
 ccd、ccatの実装は非常に簡単です。
-bashであれば以下のようなスクリプトを仕込んでおくだけです。
+Macのbashであれば
+~/.profileなどに以下のようなスクリプトを追加するだけです。
 
 <blockquote>
 <pre>
+# 実世界コンテクストをRWDに格納
 function ccd {
-    if test $1
-    then export RWDIR=$1
-    fi
+  if test $1
+    then export RWD=$1
+    else echo $RWD
+  fi
 }
-
-function gopen {
-    open http://3memo.com/$RWDIR/$1
+function cshow {
+  open http://gyamp.com/$RWD/$1
 }
-
-function gedit {
-    open http://3memo.com/$RWDIR/$1!
-}
-
-function gcat {
-    echo http://3memo.com/$RWDIR/$1/text
-    curl http://3memo.com/$RWDIR/$1/text
+function cedit {
+  open http://gyamp.com/$RWD/$1!
 }
 </pre>
 </blockquote>
@@ -373,6 +368,18 @@ ccdコマンド起動は不要になります。
 コンテクスト切り換えは仕事の効率化にとって重要なものであり、
 計算機上でも実世界でも様々なコンテクスト切り換えテクニックが利用されてきています。
 コンテクスト切換えを有効に活用するためのセンサやツールをもっと利用していきたいものです。
+
+<p>
+[1] The Invisible Gorilla: And Other Ways Our Intuitions Deceive Us.
+Christopher Chabris, Daniel Simons. Crown Archetype, May 2010.
+<br>
+[2] The Myth of Multitasking: How "Doing It All" Gets Nothing Done.
+Dave Crenshaw. Jossey-Bass, August 2008.
+<br>
+[3] The Multitasking Myth (Ashgate Studies in Human Factors for Flight Operations)
+Loukia D. Loukopoulos, R. Key Dismukes, Immanuel Barshi.
+Ashgate, November 2009.
+
 
 </body>
 </html>
