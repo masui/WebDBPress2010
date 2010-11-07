@@ -341,8 +341,24 @@ bashであれば以下のようなスクリプトを仕込んでおくだけで�
 
 <blockquote>
 <pre>
-.....
-.....
+function ccd {
+    if test $1
+    then export RWDIR=$1
+    fi
+}
+
+function gopen {
+    open http://3memo.com/$RWDIR/$1
+}
+
+function gedit {
+    open http://3memo.com/$RWDIR/$1!
+}
+
+function gcat {
+    echo http://3memo.com/$RWDIR/$1/text
+    curl http://3memo.com/$RWDIR/$1/text
+}
 </pre>
 </blockquote>
 
