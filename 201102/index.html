@@ -16,8 +16,6 @@ pre {
 
 ゲームやパズルやシミュレーションを作るときに乱数をよく利用しますが、
 
-Ruby1.8以降ではメルセンヌツイスターという優秀な乱数生成手法を使う
-
 
 <h2>確率的な問題について</h2>
 
@@ -297,7 +295,7 @@ Ratio: 0.477837135431707
 ここでプレイヤーは最初に選んだドアを、残っている開けられていないドアに
 変更しても良いと言われる。プレイヤーはドアを変更すべきだろうか？」
 <br>
-<img src="http://gyazo.com/2002f409bf8d8a1c8b8ca058344885de.png">
+<img src="http://gyazo.com/2002f409bf8d8a1c8b8ca058344885de.png" width=300>
 </blockquote>
 
 この問題は非常に勘違いしやすいものであり、
@@ -376,8 +374,20 @@ Ratio: 0.3354
 
 <h2>乱数と直感</h2>
 
+乱数を使用した結果が直感に反することはよくあります。
 
-<h2>乱数とランダム感</h2>
+
+<h3>逆正弦定理</h3>
+
+コインを投げて表が出たら1円貰い、裏が出たら1円払うというギャンブルを延々と繰り返すと
+どういう結果になるでしょうか。
+儲けの期待値がゼロあることは間違いないので、
+長くやれば損も得もしないと考えるのが普通ではないかと思います。
+
+
+
+
+<h3>乱数とランダム感</h3>
 
 「ランダムなもの」と
 「ランダムに感じられるもの」とは微妙な違いがあります。
@@ -425,7 +435,7 @@ Ratio: 0.3354
 </blockquote>
 
 <blockquote>
-<img src="randcoord.png">
+<img src="randcoord.png" width=300>
 </blockquote>
 
 10枚の写真をランダムにスライドショー表示しようとする場合、
@@ -485,7 +495,7 @@ trials.times {
 </blockquote>
 
 <blockquote>
-<img src="showall.png">
+<img src="showall.png" height=250>
 </blockquote>
 
 100枚の写真のスライドショーを行なう場合、
@@ -578,11 +588,13 @@ rand()のかわりにrand2()を使うと、以下のようなヒストグラム�
 160回あたりにピークがあり、300回すればほぼ確実にすべてのスライドを
 表示できることがわかります。
 
+<!--
 % ruby showall2.rb 100 5000 10 1000 > showall2.dat
 % gnuplot -e 'set term png; set xrange [100:400]; plot "showall2.dat" with impulses' > showall2.png
+-->
 
 <blockquote>
-<img src="showall2.png">
+<img src="showall2.png" height=250>
 <br>
 (図) ヒストグラム
 </blockquote>
@@ -604,7 +616,7 @@ rand()のかわりにrand2()を使うと、以下のようなヒストグラム�
 ランダム感があまり感じられません。
 
 <blockquote>
-<img src="http://gyazo.com/22ed0a1cec44f1e74082afcba8117423.png">
+<img src="http://gyazo.com/22ed0a1cec44f1e74082afcba8117423.png" width=300>
 </blockquote>
 
 一方、前述のニセ乱数と同じような方法を使って
@@ -613,7 +625,7 @@ rand()のかわりにrand2()を使うと、以下のようなヒストグラム�
 上の絵よりもランダムさが大きいように見えるでしょう。
 
 <blockquote>
-<img src="http://gyazo.com/8e6565b280f53079104800041001415b.png">
+<img src="http://gyazo.com/8e6565b280f53079104800041001415b.png" width=300>
 </blockquote>
 
 <h2>逆正弦定理</h2>
@@ -621,6 +633,37 @@ rand()のかわりにrand2()を使うと、以下のようなヒストグラム�
 
 <h2>乱数の品質</h2>
 
+最近のプログラミング言語には優秀な乱数生成ライブラリが有るのが普通です。
+たとえばRuby1.8以降のrand()関数は
+メルセンヌツイスターという優秀な乱数生成手法を利用していますが、
+古いライブラリでは問題が出ることもあります。
+例えばCの古いrand()関数でランダムな座標を生成しようとすると、
+条件によっては乱数として利用できません。
+
+<blockquote>
+<pre>
+#include <stdio.h>
+main()
+{
+  for(;;){
+    int x = rand();
+    int y = rand();
+    if(x < 0x100000 && y < 0x100000){
+      printf("%d %d\n",x & 0xff,y & 0xff);
+    }
+  }
+}
+</pre>
+</blockquote>
+
+上のプログラムをSnowLeopard上で実行して
+生成した座標をプロットすると、
+下図のように平行線上に点が並んでしまいます。
+(rand()をrandom()に変更するとこのようなことは起こりません)
+
+<blockquote>
+<img src="badrandcoord.png" width=300>
+</blockquote>
 
 </body>
 </html>
